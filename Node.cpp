@@ -53,6 +53,22 @@ class LinkedList{
             temp->setNext(new Node(value));
             
         }
+        // Insert value at 1-indexed position n (n <= 1 makes it the new head).
+        // If n is past the end, the value is appended at the tail.
+        void insert(int value, int n){
+            Node* newNode = new Node(value);
+            if(head == nullptr || n <= 1){
+                newNode->setNext(head);
+                head = newNode;
+                return;
+            }
+            Node* temp = head;
+            for(int i = 0; i < n - 2 && temp->getNext() != nullptr; i++){
+                temp = temp->getNext();
+            }
+            newNode->setNext(temp->getNext());
+            temp->setNext(newNode);
+        }
 
         std::vector<int> twoSum(int target){
             std::unordered_map<int, int> map;
@@ -85,13 +101,9 @@ class LinkedList{
 
 
 
-            Node* fast = head;
-            Node* mid = head;
-            // mid is slow
-            while(fast != nullptr && fast->getNext() != nullptr){
-                fast = fast->getNext()->getNext();
-                mid = mid->getNext();
-            }
+
+            Node* mid = middleNode(head);
+
             Node* firstHalf = head;
 
             // if we have bad. func should return true...
@@ -104,7 +116,7 @@ class LinkedList{
 
             // a now points to null ptr
             // prev a then b points to a
-            // so string becomes.... [b] [ba] / two parts
+            // so string becomes.... [ba] [ba] / two parts
 
             while(current != nullptr){
                 next = current->getNext();
@@ -195,8 +207,8 @@ class LinkedList{
         }
 
 
-        void bubbleSort(Node* node){
-            if(node == nullptr || node->getNext() == nullptr) return;
+        Node* bubbleSort(Node* node){
+            if(node == nullptr || node->getNext() == nullptr) return node;
 
             bool swapped;
 
@@ -213,8 +225,10 @@ class LinkedList{
                         current->getNext()->setValue(value1);
                         swapped = true;
                     }
+                    current = current->getNext();
                 }
             }while(swapped);
+            return node;
         }
 
     Node* insertionSort(Node* node){
@@ -241,12 +255,77 @@ class LinkedList{
         delete dummy;
         return sortedHead;
     }
+
+    Node* reverse(Node* node){
+        if(node == nullptr || node->getNext() == nullptr){
+            return node;
+        }
+        Node* curr = node;
+        Node* next = nullptr;
+        Node* prev = nullptr;
+        while(curr != nullptr){
+            next = curr->getNext();
+            curr->setNext(prev);
+
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+
+    }
+
+    Node* reverseRecursive(Node* node){
+        if(node == nullptr || node->getNext() == nullptr) return node;
+
+        Node* newHead = reverseRecursive(node->getNext());
+        node->getNext()->setNext(node);
+        node->setNext(nullptr);
+
+        return newHead;
+
+        
+    }
+
+    Node* mergeTwoLists(Node* node1, Node* node2){
+        Node* dummy = new Node(0);
+        Node* tail = dummy;
+        Node* temp1 = bubbleSort(node1);
+        Node* temp2 = bubbleSort(node2);
+
+        while(temp1 != nullptr && temp2 != nullptr){
+            if(temp1->getValue() < temp2->getValue()){
+                tail->setNext(temp1);
+                temp1 = temp1->getNext();
+            }else{
+                tail->setNext(temp2);
+                temp2 = temp2->getNext();
+            }
+            tail = tail->getNext();
+        }
+        while(temp1 != nullptr){
+            tail->setNext(temp1);
+            temp1 = temp1->getNext();
+            tail = tail->getNext();
+        }
+        while(temp2 != nullptr){
+            tail->setNext(temp2);
+            temp2 = temp2->getNext();
+            tail = tail->getNext();
+        }
+        return dummy->getNext();
+    }
+    Node* middleNode(Node* node){
+        Node* fast = node;
+        Node* mid = node;
+        while(fast != nullptr && fast->getNext() != nullptr){
+            fast = fast->getNext()->getNext();
+            mid = mid->getNext();
+        }
+        return mid;
+    }
+
+
 };
-
-
-
-
-
 
 
 int main(){
