@@ -1,4 +1,4 @@
-# CPPDSA
+# CppDSA
 
 Data-structures and algorithms practice in C++ — the C++ counterpart to
 [JavaDSA](https://github.com/A-Freeo/JavaDSA). Each structure is hand-implemented to
@@ -14,13 +14,18 @@ practice pointer manipulation, memory management, and common interview patterns.
 | Method | Problem |
 |---|---|
 | `add` | Append a value to the tail |
-| `twoSum` | Find a pair adding to a target (hash map) |
+| `insert` | Insert a value at a 1-indexed position |
+| `reverse` | Reverse the list (iterative) |
+| `reverseRecursive` | Reverse the list (recursive) |
+| `middleNode` | Find the middle node (fast/slow pointers) |
 | `isPalindrome` | Check if the list reads the same both ways |
+| `twoSum` | Find a pair adding to a target (hash map) |
 | `cycleDetection` | Detect a cycle (fast/slow pointers) |
 | `getNthNodeFromEnd` | Find the Nth node from the end |
 | `removeNthNodeFromEnd` | Remove the Nth node from the end |
 | `bubbleSort` | Sort the list in place |
-| `insertionSort` | Sort by rebuilding into a new ordered list |
+| `insertionSort` | Sort the list in place (value-based insertion) |
+| `mergeTwoLists` | Merge two lists into one sorted list |
 
 ## Build & run
 
