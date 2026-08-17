@@ -6,8 +6,8 @@ practice pointer manipulation, memory management, and common interview patterns.
 
 ## What's here
 
-- **Linked list** — `Node.cpp` — a `Node` class (raw `Node*` links) and a `LinkedList`
-  with a set of classic algorithms (table below).
+- **Linked list** — `Node.hpp` (templated `Node<T>`) and `LinkedList.cpp` (templated
+  `LinkedList<T>` with a set of classic algorithms, table below).
 
 ### LinkedList algorithms
 
@@ -30,8 +30,8 @@ practice pointer manipulation, memory management, and common interview patterns.
 ## Build & run
 
 ```
-g++ Node.cpp -o Node
-./Node
+g++ LinkedList.cpp -o LinkedList
+./LinkedList
 ```
 
 ## Roadmap

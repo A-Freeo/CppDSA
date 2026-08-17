@@ -1,5 +1,5 @@
-# Compiled binary (from: g++ Node.cpp -o Node)
-Node
+# Compiled binary (from: g++ LinkedList.cpp -o LinkedList)
+LinkedList
 
 # macOS
 .DS_Store
