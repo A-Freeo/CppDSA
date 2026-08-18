@@ -9,6 +9,7 @@ class Node {
 
     public:
         Node(T value) : next(nullptr), value(value) {}
+        Node() : next(nullptr), value(T()) {}
 
         Node<T>* getNext(){
             return next;

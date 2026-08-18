@@ -1,54 +1,12 @@
-#include <unordered_map>
-#include <vector>
-#include <iostream>
+#pragma once
 #include "Node.hpp"
+#include <vector>
+#include <unordered_map>
+#include <iostream>
 
-template <typename T>
-class LinkedList {
-    private:
-        Node<T>* head;
-    public:
-        LinkedList() : head(nullptr) {}
-
-        Node<T>* getHead(){
-            return head;
-        }
-
-        // --- Core operations ---
-
-        void add(T value){
-            if(head == nullptr){
-                head = new Node<T>(value);
-                return;
-            }
-            Node<T>* temp = head;
-            while(temp->getNext() != nullptr){
-                temp = temp->getNext();
-            }
-
-            temp->setNext(new Node<T>(value));
-
-        }
-
-        // Insert value at 1-indexed position n (n <= 1 makes it the new head).
-        // If n is past the end, the value is appended at the tail.
-        void insert(T value, int n){
-            Node<T>* newNode = new Node<T>(value);
-            if(head == nullptr || n <= 1){
-                newNode->setNext(head);
-                head = newNode;
-                return;
-            }
-            Node<T>* temp = head;
-            for(int i = 0; i < n - 2 && temp->getNext() != nullptr; i++){
-                temp = temp->getNext();
-            }
-            newNode->setNext(temp->getNext());
-            temp->setNext(newNode);
-        }
-
-        // --- Reversal ---
-
+namespace LinkedListController {
+    // --- Reversal ---
+        template<typename T>
         Node<T>* reverse(Node<T>* node){
             if(node == nullptr || node->getNext() == nullptr){
                 return node;
@@ -65,7 +23,7 @@ class LinkedList {
             }
             return prev;
         }
-
+        template<typename T>
         Node<T>* reverseRecursive(Node<T>* node){
             if(node == nullptr || node->getNext() == nullptr) return node;
 
@@ -78,6 +36,7 @@ class LinkedList {
 
         // Fast/slow walk: when fast falls off the end, mid sits at the
         // start of the second half (or the center node if the list is odd).
+       template<typename T>
         Node<T>* middleNode(Node<T>* node){
             Node<T>* fast = node;
             Node<T>* mid = node;
@@ -87,7 +46,7 @@ class LinkedList {
             }
             return mid;
         }
-
+        template<typename T>
         bool isPalindrome(Node<T>* node){
             if(node == nullptr || node->getNext() == nullptr){
                 return true;   // empty or single node is always a palindrome
@@ -116,15 +75,15 @@ class LinkedList {
                 secondHalf = secondHalf->getNext();
             }
 
-            return true;
+            return true; 
         }
 
         // --- Queries ---
-
-        std::vector<int> twoSum(T target){
+        template<typename T>
+        std::vector<int> twoSum(T target, Node<T>* node){
             std::unordered_map<T, int> map;
 
-            Node<T>* current = head;
+            Node<T>* current = node;
             int i = 0;
             while(current != nullptr){
                 T value = current->getValue();
@@ -141,7 +100,7 @@ class LinkedList {
             return {-1, -1};
 
         }
-
+        template<typename T>
         bool cycleDetection(Node<T>* node){
             Node<T>* fast = node;
             Node<T>* slow = node;
@@ -157,7 +116,7 @@ class LinkedList {
             return false;
 
         }
-
+        template<typename T>
         Node<T>* getNthNodeFromEnd(Node<T>* node, int n){
             Node<T>* fast = node;
             Node<T>* slow = node;
@@ -173,7 +132,7 @@ class LinkedList {
 
             return slow;
         }
-
+        template<typename T>
         T removeNthNodeFromEnd(Node<T>* node, int n){
             Node<T>* dummy = new Node<T>(T{});
             dummy->setNext(node);
@@ -202,6 +161,7 @@ class LinkedList {
         // --- Sorting ---
 
         // In-place bubble sort: swap values, so the head node never changes.
+        template<typename T>
         void bubbleSort(Node<T>* node){
             if(node == nullptr || node->getNext() == nullptr) return;
 
@@ -227,6 +187,7 @@ class LinkedList {
 
         // In-place insertion sort: for each node, slide its value back into
         // the sorted prefix, shifting larger values forward. Head is stable.
+        template<typename T>
         void insertionSort(Node<T>* node){
             if(node == nullptr || node->getNext() == nullptr) return;
 
@@ -248,7 +209,7 @@ class LinkedList {
                 }
             }
         }
-
+        template<typename T>
         Node<T>* mergeTwoLists(Node<T>* node1, Node<T>* node2){
             bubbleSort(node1);
             bubbleSort(node2);
@@ -281,22 +242,14 @@ class LinkedList {
             return dummy->getNext();
         }
 
-
+        template<typename T>
+        void print(Node<T>* node){
+            Node<T>* temp = node;
+            int i = 0;
+            while(temp != nullptr){
+                std::cout << "Node " << i << ": " << temp->getValue() << std::endl;
+                temp = temp->getNext();
+                i++;
+            }
+        }
 };
-
-
-int main(){
-    LinkedList<int> list;
-    list.add(2);
-    list.add(1);
-    list.add(2);
-    list.add(2);
-
-    if(list.isPalindrome(list.getHead())){
-        std::cout << "\nTrue!\n";
-    }else{
-        std::cout << "\nFalse!\n";
-    }
-
-    return 0;
-}

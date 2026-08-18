@@ -6,8 +6,11 @@ practice pointer manipulation, memory management, and common interview patterns.
 
 ## What's here
 
-- **Linked list** — `Node.hpp` (templated `Node<T>`) and `LinkedList.cpp` (templated
-  `LinkedList<T>` with a set of classic algorithms, table below).
+- **Linked list** — split into headers plus a driver:
+  - `Node.hpp` — templated `Node<T>`.
+  - `LinkedList.hpp` — templated `LinkedList<T>` container (core ops: `add`, `insert`, `clear`, ...).
+  - `LinkedListController.hpp` — a `LinkedListController` namespace of algorithm templates (table below).
+  - `main.cpp` — the demo driver.
 
 ### LinkedList algorithms
 
@@ -30,8 +33,8 @@ practice pointer manipulation, memory management, and common interview patterns.
 ## Build & run
 
 ```
-g++ LinkedList.cpp -o LinkedList
-./LinkedList
+g++ main.cpp -o main
+./main
 ```
 
 ## Roadmap
