@@ -2,14 +2,15 @@
 #include "Node.hpp"
 #include "Stack.hpp"
 #include <iostream>
+#include <string>
+#include <vector>
 
 namespace StackController {
 
     // Print the stack top-to-bottom by walking the nodes (no popping).
     template<typename T>
     void dump(Stack<T> stack){
-        if(stack.isEmpty()) return;   // peek() throws on empty, so bail first
-        Node<T>* current = stack.peek();
+        Node<T>* current = stack.getTop();   // nullptr if empty
         int i = 0;
 
         while(current != nullptr){
@@ -18,4 +19,45 @@ namespace StackController {
             current = current->getNext();
         }
     }
+
+
+    inline bool validParenthesis(std::string s){
+        Stack<char> stack;
+        for(char c : s){
+            if(c == '(' || c == '{' || c == '['){
+                stack.push(c);
+            } else {
+                if(stack.isEmpty()) return false;
+                char top = stack.pop();
+                if((c == ')' && top != '(') || (c == '}' && top != '{') || (c == ']' && top != '[')) return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+
+    template<typename T>
+    Stack<T> reverse(Stack<T> stack){
+        Stack<T> newStack;
+        while(!(stack.isEmpty())){
+            newStack.push(stack.pop());
+        }
+        return newStack;
+    }
+
+    inline std::vector<int> NextGreaterElement(std::vector<int> nums){
+
+        int n = nums.size();
+        Stack<int> stack;
+        std::vector<int> result(n, -1);
+
+        for(int i = 0; i < n; i ++){
+            while(!(stack.isEmpty()) && nums[stack.peek()] < nums[i]){
+                result[stack.pop()] = nums[i];
+            }
+            stack.push(i);
+        }
+        
+        return result;
+    }
+
 };

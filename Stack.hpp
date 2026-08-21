@@ -19,8 +19,12 @@ class Stack{
             temp->setNext(top);
             top = temp;
         }
-        Node<T>* peek(){
+        T peek(){
             if(top == nullptr) throw std::runtime_error("peek from empty stack");
+            return top->getValue();
+        }
+        // Top node, for controllers that need to walk the stack (e.g. dump).
+        Node<T>* getTop(){
             return top;
         }
         T pop(){
