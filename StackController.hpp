@@ -10,7 +10,7 @@ namespace StackController {
     // Print the stack top-to-bottom by walking the nodes (no popping).
     template<typename T>
     void dump(Stack<T> stack){
-        Node<T>* current = stack.getTop();   // nullptr if empty
+        Node<T>* current = stack.topNode();   // nullptr if empty
         int i = 0;
 
         while(current != nullptr){
@@ -27,18 +27,18 @@ namespace StackController {
             if(c == '(' || c == '{' || c == '['){
                 stack.push(c);
             } else {
-                if(stack.isEmpty()) return false;
+                if(stack.empty()) return false;
                 char top = stack.pop();
                 if((c == ')' && top != '(') || (c == '}' && top != '{') || (c == ']' && top != '[')) return false;
             }
         }
-        return stack.isEmpty();
+        return stack.empty();
     }
 
     template<typename T>
     Stack<T> reverse(Stack<T> stack){
         Stack<T> newStack;
-        while(!(stack.isEmpty())){
+        while(!(stack.empty())){
             newStack.push(stack.pop());
         }
         return newStack;
@@ -51,7 +51,7 @@ namespace StackController {
         std::vector<int> result(n, -1);
 
         for(int i = 0; i < n; i ++){
-            while(!(stack.isEmpty()) && nums[stack.peek()] < nums[i]){
+            while(!(stack.empty()) && nums[stack.top()] < nums[i]){
                 result[stack.pop()] = nums[i];
             }
             stack.push(i);

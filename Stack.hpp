@@ -5,52 +5,46 @@
 template <typename T>
 class Stack{
     private:
-        Node<T>* top;
+        Node<T>* topPtr;
     public:
-        Stack() : top(nullptr) {}
+        Stack() : topPtr(nullptr) {}
 
         void push(T value){
-
             Node<T>* temp = new Node<T>(value);
-            if(top == nullptr){
-                top = temp;
+            if(topPtr == nullptr){
+                topPtr = temp;
                 return;
             }
-            temp->setNext(top);
-            top = temp;
+            temp->setNext(topPtr);
+            topPtr = temp;
         }
-        T peek(){
-            if(top == nullptr) throw std::runtime_error("peek from empty stack");
-            return top->getValue();
+        T top(){
+            if(topPtr == nullptr) throw std::runtime_error("top of empty stack");
+            return topPtr->getValue();
         }
         // Top node, for controllers that need to walk the stack (e.g. dump).
-        Node<T>* getTop(){
-            return top;
+        Node<T>* topNode(){
+            return topPtr;
         }
         T pop(){
-            if(top == nullptr) throw std::runtime_error("pop from empty stack");
-            T value = top->getValue();
-            Node<T>* toDelete = top;
-            top = top->getNext();
+            if(topPtr == nullptr) throw std::runtime_error("pop from empty stack");
+            T value = topPtr->getValue();
+            Node<T>* toDelete = topPtr;
+            topPtr = topPtr->getNext();
             delete toDelete;
             return value;
         }
 
-        bool isEmpty(){
-            if(top == nullptr){
-                return true;
-            }else{
-                return false;
-            }
+        bool empty(){
+            return topPtr == nullptr;
         }
         void clear(){
             Node<T>* next;
-            while(top != nullptr){
-                next = top->getNext();
-                delete top;
-                top = next;
+            while(topPtr != nullptr){
+                next = topPtr->getNext();
+                delete topPtr;
+                topPtr = next;
             }
-            top = nullptr;
+            topPtr = nullptr;
         }
-
 };
