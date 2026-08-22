@@ -4,6 +4,8 @@
 #include <iostream>
 #include "Node.hpp"
 
+// Singly linked list of Node<T>. Holds only the head; the controller
+// (LinkedListController) provides the algorithms.
 template <typename T>
 class LinkedList {
     private:
@@ -15,6 +17,9 @@ class LinkedList {
             return head;
         }
 
+        // --- Core operations ---
+
+        // Append a value to the tail (walks to the end first).
         void add(T value){
             if(head == nullptr){
                 head = new Node<T>(value);
@@ -29,6 +34,9 @@ class LinkedList {
 
         }
 
+        // Remove every node equal to value (uses a dummy head to simplify the edge case).
+        // BUG: after a delete, prev/current still advance, so the node right after a
+        //      removed one is skipped (e.g. consecutive duplicates aren't all removed).
         Node<T>* remove(T value){
             if(head == nullptr) return nullptr;
 
@@ -68,6 +76,7 @@ class LinkedList {
             temp->setNext(newNode);
         }
 
+        // Free every node and reset to empty.
         void clear(){
             Node<T>* next = nullptr;
             while(head != nullptr){

@@ -5,6 +5,7 @@
 
 int main(){
 
+    // --- middleNode ---
     LinkedList<int> list;
     list.add(1);
     list.add(2);
@@ -13,9 +14,11 @@ int main(){
 
     Node<int>* temp = LinkedListController::middleNode(list.getHead());
     int value = temp->getValue();
-    std::cout << value << std::endl;
+    std::cout << value << std::endl;   // middle of 1 2 3 4
 
     list.clear();
+
+    // --- bubbleSort ---
 
     list.add(5);
     list.add(4);
