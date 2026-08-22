@@ -5,7 +5,11 @@
 #include <string>
 #include <vector>
 
+// Classic stack algorithms. Free function templates in a namespace
+// (C++'s take on Java's class-of-static-methods controller).
 namespace StackController {
+
+    // --- Printing ---
 
     // Print the stack top-to-bottom by walking the nodes (no popping).
     template<typename T>
@@ -21,6 +25,9 @@ namespace StackController {
     }
 
 
+    // --- Algorithms ---
+
+    // Are the brackets balanced? Push openers, match each closer against the top.
     inline bool validParenthesis(std::string s){
         Stack<char> stack;
         for(char c : s){
@@ -35,6 +42,7 @@ namespace StackController {
         return stack.empty();
     }
 
+    // Reverse a stack by popping onto a second stack (takes its own deep copy by value).
     template<typename T>
     Stack<T> reverse(Stack<T> stack){
         Stack<T> newStack;
@@ -44,6 +52,8 @@ namespace StackController {
         return newStack;
     }
 
+    // For each element, the next element to its right that's greater (-1 if none).
+    // Monotonic stack: it holds indices whose answer isn't found yet.
     inline std::vector<int> NextGreaterElement(std::vector<int> nums){
 
         int n = nums.size();
