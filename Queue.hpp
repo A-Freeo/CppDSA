@@ -63,7 +63,7 @@ class Queue{
 
 
         T dequeue(){
-            if(head == nullptr) throw std::runtime_error("front of queue empty");
+            if(head == nullptr) throw std::runtime_error("dequeue from empty queue");
             
             Node<T>* node = head;
             T value = node->getValue();
@@ -79,7 +79,7 @@ class Queue{
         }
 
         T front(){
-            if(head == nullptr) throw std::runtime_error("front of queue empty");
+            if(head == nullptr) throw std::runtime_error("front of empty queue");
             return head->getValue();
         }
 
