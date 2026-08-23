@@ -1,5 +1,5 @@
-# Compiled binary (from: g++ main.cpp -o main)
-main
+# compiled binaries (from: g++ main.cpp -o main)
+*/main
 
 # macOS
 .DS_Store

@@ -1,48 +1,38 @@
 # CppDSA
 
 Data-structures and algorithms practice in C++ — the C++ counterpart to
-[JavaDSA](https://github.com/A-Freeo/JavaDSA). Each structure is hand-implemented to
-practice pointer manipulation, memory management, and common interview patterns.
+[JavaDSA](https://github.com/A-Freeo/JavaDSA). Each structure is hand-implemented
+(templated) to practice pointer manipulation, memory management, templates, and common
+interview patterns.
+
+Each structure lives in its own folder and compiles on its own.
 
 ## What's here
 
-- **Linked list** — split into headers plus a driver:
-  - `Node.hpp` — templated `Node<T>`.
-  - `LinkedList.hpp` — templated `LinkedList<T>` container (core ops: `add`, `insert`, `clear`, ...).
-  - `LinkedListController.hpp` — a `LinkedListController` namespace of algorithm templates (table below).
-  - `main.cpp` — the demo driver.
-
-### LinkedList algorithms
-
-| Method | Problem |
+| Folder | Structure |
 |---|---|
-| `add` | Append a value to the tail |
-| `insert` | Insert a value at a 1-indexed position |
-| `reverse` | Reverse the list (iterative) |
-| `reverseRecursive` | Reverse the list (recursive) |
-| `middleNode` | Find the middle node (fast/slow pointers) |
-| `isPalindrome` | Check if the list reads the same both ways |
-| `twoSum` | Find a pair adding to a target (hash map) |
-| `cycleDetection` | Detect a cycle (fast/slow pointers) |
-| `getNthNodeFromEnd` | Find the Nth node from the end |
-| `removeNthNodeFromEnd` | Remove the Nth node from the end |
-| `bubbleSort` | Sort the list in place |
-| `insertionSort` | Sort the list in place (value-based insertion) |
-| `mergeTwoLists` | Merge two lists into one sorted list |
+| [`LinkedList/`](LinkedList) | Templated singly linked list + a controller of classic list algorithms |
+| [`Stack/`](Stack) | Templated stack (with the Rule of Three) + controller; see `Stack/NOTES.md` |
+| [`Queue/`](Queue) | Templated queue (head + tail pointers, O(1) enqueue) + controller |
+| [`Vector/`](Vector) | Dynamic array (`std::vector` from scratch) — raw array that doubles on growth |
+
+Each folder holds the templated headers (`Node.hpp`, the container, its controller) plus a
+`main.cpp` demo driver.
 
 ## Build & run
 
 ```
+cd Stack        # or LinkedList / Queue
 g++ main.cpp -o main
 ./main
 ```
 
 ## Roadmap
 
-- [x] Linked list — traversal, two-sum, palindrome, cycle detection, Nth-from-end, sorts
-- [ ] Stack
-- [ ] Queue
+- [x] Linked list — reverse, palindrome, cycle detection, Nth-from-end, sorts, merge
+- [x] Stack — validParenthesis, reverse, next-greater-element, Rule of Three
+- [x] Queue — reverse, reverseFirstK, interleave
+- [x] Dynamic array (Vector) — raw array + resize-on-grow, Rule of Three
 - [ ] Hash map from scratch (buckets + collision handling)
 - [ ] Binary search tree — insert, search, delete, traversals
-- [ ] Dynamic array (`std::vector` from scratch) — raw backing array + resize-on-grow
 - [ ] Min-heap / priority queue
